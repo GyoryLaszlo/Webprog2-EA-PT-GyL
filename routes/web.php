@@ -21,4 +21,15 @@ Route::get('/admin', function () {
     return view('admin');
 })->middleware('admin')->name('admin.dashboard');
 
+Route::view('/adatbazis', 'adatbazis')->name('adatbazis');
+Route::get('/kapcsolat', fn() => view('contact'))->name('contact.show');
+Route::view('/diagram', 'chart')->name('chart');
+Route::view('/crud', 'crud.index')->name('crud.index');
+
+Route::middleware('auth')->group(function () {
+    Route::view('/uzenetek', 'messages')->name('messages.index');
+
+});
+
+
 require __DIR__.'/auth.php';
