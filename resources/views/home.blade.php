@@ -21,19 +21,22 @@
     <body id="page-top">
         <!-- Navigation-->
          <nav style="padding:10px; display:flex; gap:12px; justify-content:flex-end; font-family: system-ui, sans-serif;">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="#page-top">Notebooks</a>
             @guest
-                <button type="button" onclick="openLoginModal()" style="padding:8px 12px;">Bejelentkezés</button>
-                <a href="{{ route('register') }}" style="padding:8px 12px;">Regisztráció</a>
+                <button class="btn btn-primary btn-sm" type="button" onclick="openLoginModal()" style="padding:8px 12px;">Bejelentkezés</button>
+                <a class="btn btn-light btn-sm" href="{{ route('register') }}" style="padding:8px 12px;">Regisztráció</a>
             @endguest
 
             @auth
                 <span>Üdv, {{ Auth::user()->name }}!</span>
                 <form method="POST" action="{{ route('logout') }}" style="display:inline;">
                     @csrf
-                    <button type="submit" style="margin-left:8px; padding:8px 12px;">Kijelentkezés</button>
+                    <button class="btn btn-light btn-sm" type="submit" style="margin-left:8px; padding:8px 12px;">Kijelentkezés</button>
                 </form>
             @endauth
-</nav>
+            </div>
+        </nav>
 
         <!--<nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
             <div class="container px-4 px-lg-5">
