@@ -1,3 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.pagination .page-link { padding: .15rem .4rem; font-size: .875rem; }
+.pagination .page-item .page-link svg { width: .9rem; height: .9rem; }
