@@ -1,29 +1,31 @@
 @extends('layouts.app')
-@section('title','Adatbázis')
-@section('content')
-  <div class="container py-5">
-    <h1 class="mb-3">Adatbázis</h1>
-    <p class="text-muted">Itt fogjuk ORM-mel megjeleníteni a 3 táblából az adatokat.</p>
 
-    <div class="row g-3">
-      <div class="col-md-4">
-        <div class="card h-100"><div class="card-body">
-          <h5 class="card-title">Tábla #1</h5>
-          <p class="mb-0">Helyőrző lista…</p>
-        </div></div>
-      </div>
-      <div class="col-md-4">
-        <div class="card h-100"><div class="card-body">
-          <h5 class="card-title">Tábla #2</h5>
-          <p class="mb-0">Helyőrző lista…</p>
-        </div></div>
-      </div>
-      <div class="col-md-4">
-        <div class="card h-100"><div class="card-body">
-          <h5 class="card-title">Tábla #3</h5>
-          <p class="mb-0">Helyőrző lista…</p>
-        </div></div>
-      </div>
-    </div>
-  </div>
+@section('content')
+<h1>Gépek</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Gyártó</th><th>Típus</th><th>Kijelző</th>
+      <th>Memória</th><th>HDD</th><th>VGA</th>
+      <th>Processzor</th><th>OS</th><th>Ár</th><th>Db</th>
+    </tr>
+  </thead>
+  <tbody>
+  @foreach($gepek as $g)
+    <tr>
+      <td>{{ $g->gyarto }}</td>
+      <td>{{ $g->tipus }}</td>
+      <td>{{ $g->kijelzo }}</td>
+      <td>{{ $g->memoria }} MB</td>
+      <td>{{ $g->merevlemez }} GB</td>
+      <td>{{ $g->videovezerlo }}</td>
+      <td>{{ $g->processzor->gyarto }} {{ $g->processzor->tipus }}</td>
+      <td>{{ $g->oprendszer->nev }}</td>
+      <td>{{ number_format($g->ar,0,'',' ') }} Ft</td>
+      <td>{{ $g->db }}</td>
+    </tr>
+  @endforeach
+  </tbody>
+</table>
+{{ $gepek->links() }}
 @endsection
