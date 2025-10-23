@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdatbazisController;
 use App\Http\Controllers\ContactController;
+use App\Models\Message;
+
 
 Route::get('/', function () {
     return view('home');
@@ -27,14 +29,20 @@ Route::get('/adatbazis', [AdatbazisController::class, 'index'])
      ->name('adatbazis');
 
 Route::get('/kapcsolat', fn() => view('contact'))->name('contact.show');
-Route::post('/kapcsolat', [ContactController::class, 'store'])->name('contact.store'); 
+Route::post('/kapcsolat', [ContactController::class, 'store'])->name('contact.store');
 
 Route::view('/diagram', 'chart')->name('chart');
 Route::view('/crud', 'crud.index')->name('crud.index');
 
 Route::middleware('auth')->group(function () {
-    Route::view('/uzenetek', 'messages')->name('messages.index');
+    /*Route::view('/uzenetek', 'messages')->name('messages.index');*/
+    Route::get('/uzenetek', function () {
+        $messages = Message::latest()
+            ->paginate(15)
+            ->withQueryString();
 
+        return view('messages', compact('messages')); // => resources/views/messages.blade.php
+    })->name('messages.index');
 });
 
 
