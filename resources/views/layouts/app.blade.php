@@ -16,8 +16,17 @@
 <body id="page-top">
   @include('partials.navbar')
 
+  @php($isHome = request()->routeIs('home'))
   <main>
-    @yield('content')
+    @if ($isHome)
+      @yield('content')
+    @else
+      <div class="container px-4 px-lg-5 h-100">
+        <div class="subpage">
+          @yield('content')
+        </div>
+      </div>
+    @endif
   </main>
 
   <!-- JS (sorrend fontos!) -->

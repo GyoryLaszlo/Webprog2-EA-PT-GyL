@@ -3617,6 +3617,7 @@ textarea.form-control-lg {
   padding-left: 0;
   margin-bottom: 0;
   list-style: none;
+
 }
 
 .nav-link {
@@ -10867,6 +10868,7 @@ hr.divider-light {
 #mainNav {
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
   background-color: #fff;
+  background-color: bisque;
   transition: background-color 0.2s ease;
 }
 #mainNav .navbar-brand {
@@ -10891,6 +10893,7 @@ hr.divider-light {
   #mainNav {
     box-shadow: none;
     background-color: transparent;
+    background-color: bisque;
   }
   #mainNav .navbar-brand {
     color: #0e0e0e;
@@ -10911,6 +10914,7 @@ hr.divider-light {
   #mainNav.navbar-shrink {
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
     background-color: #fff;
+      background-color: bisque;
   }
   #mainNav.navbar-shrink .navbar-brand {
     color: #212529;
@@ -10992,4 +10996,8 @@ header.masthead h1, header.masthead .h1 {
 }
 #portfolio .container-fluid .portfolio-box:hover .portfolio-box-caption, #portfolio .container-sm .portfolio-box:hover .portfolio-box-caption, #portfolio .container-md .portfolio-box:hover .portfolio-box-caption, #portfolio .container-lg .portfolio-box:hover .portfolio-box-caption, #portfolio .container-xl .portfolio-box:hover .portfolio-box-caption, #portfolio .container-xxl .portfolio-box:hover .portfolio-box-caption {
   opacity: 1;
+}
+
+.subpage {
+   margin-top:75px
 }
