@@ -32,7 +32,9 @@
             </button>
           </li>
           <li class="nav-item">
-            <a class="btn btn-outline-dark btn-sm" href="{{ route('register') }}">Regisztráció</a>
+              <button class="btn btn-outline-dark btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#registerModal">
+                Regisztráció
+              </button>
           </li>
         @endguest
 

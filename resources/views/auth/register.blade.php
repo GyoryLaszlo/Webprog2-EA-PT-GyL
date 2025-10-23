@@ -1,52 +1,51 @@
-<x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
-        @csrf
+@extends('layouts.app')
+@section('title','Regisztráció')
 
-        <!-- Name -->
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
-        </div>
+@section('content')
+<div class="container py-5" style="max-width:720px">
+  <h1 class="mb-4">Regisztráció</h1>
 
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+  {{-- Hibák --}}
+  @if ($errors->any())
+    <div class="alert alert-danger">
+      <ul class="mb-0 ps-3">
+        @foreach ($errors->all() as $error)
+          <li>{{ $error }}</li>
+        @endforeach
+      </ul>
+    </div>
+  @endif
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+  <form method="POST" action="{{ route('register') }}" class="row g-3">
+    @csrf
+    <div class="col-12">
+      <label class="form-label">Név</label>
+      <input class="form-control" type="text" name="name" value="{{ old('name') }}" required autofocus>
+    </div>
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
+    <div class="col-12">
+      <label class="form-label">E-mail</label>
+      <input class="form-control" type="email" name="email" value="{{ old('email') }}" required>
+    </div>
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
+    <div class="col-md-6">
+      <label class="form-label">Jelszó</label>
+      <input class="form-control" type="password" name="password" required autocomplete="new-password">
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">Jelszó megerősítése</label>
+      <input class="form-control" type="password" name="password_confirmation" required autocomplete="new-password">
+    </div>
 
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+    <div class="col-12 d-flex align-items-center justify-content-between mt-3">
+      <a href="{{ route('login') }}" class="link-secondary" onclick="event.preventDefault(); document.getElementById('openLoginViaLink').click();">
+        Már van fiókod? Jelentkezz be!
+      </a>
+      <button class="btn btn-primary" type="submit">Regisztráció</button>
+    </div>
+  </form>
+</div>
 
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
-
-            <x-primary-button class="ms-4">
-                {{ __('Register') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+{{-- rejtett gomb a login modal megnyitásához (ha akarod) --}}
+<button id="openLoginViaLink" type="button" class="d-none" data-bs-toggle="modal" data-bs-target="#loginModal"></button>
+@endsection

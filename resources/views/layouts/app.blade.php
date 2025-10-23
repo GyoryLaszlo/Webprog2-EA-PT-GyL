@@ -28,6 +28,7 @@
 
   {{-- MODALOKAT MINDIG IDE TEGYÜK, A SZKRIPTEK UTÁN, HOGY A BOOTSTRAP MÁR ELÉRHETŐ LEGYEN --}}
   @include('partials.login-modal')
+  @include('partials.register-modal')
 
   @yield('scripts')
 </body>
