@@ -13,11 +13,11 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
   <link href="{{ asset('css/styles.css') }}" rel="stylesheet" />
 </head>
-<body id="page-top">
+<body id="page-top" class="d-flex flex-column min-vh-100">
   @include('partials.navbar')
 
   @php($isHome = request()->routeIs('home'))
-  <main>
+  <main class="flex-grow-1">
     @if ($isHome)
       @yield('content')
     @else
@@ -28,7 +28,9 @@
       </div>
     @endif
   </main>
-
+  <footer class="bg-light py-5 mt-auto">
+    <div class="container px-4 px-lg-5"><div class="small text-center text-muted">Copyright &copy; 2025 - NJE-Gamf</div></div>
+  </footer>
   <!-- JS (sorrend fontos!) -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
