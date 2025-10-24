@@ -6,6 +6,7 @@ use App\Http\Controllers\AdatbazisController;
 use App\Http\Controllers\ContactController;
 use App\Models\Message;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\ProcesszorController;
 
 Route::get('/', function () {
     return view('home');
@@ -72,7 +73,11 @@ Route::get('/chart/avg-price-by-cpu', function () {
 })->name('chart.priceByCpu');
 
 
-Route::view('/crud', 'crud.index')->name('crud.index');
+//Route::view('/crud', 'crud.index')->name('crud.index');
+Route::get('/crud', [ProcesszorController::class, 'index'])->name('crud.index');
+Route::resource('crud/processzorok', ProcesszorController::class)
+    ->parameters(['processzorok' => 'processzor'])
+    ->names('crud.processzorok');
 
 Route::middleware('auth')->group(function () {
     /*Route::view('/uzenetek', 'messages')->name('messages.index');*/
