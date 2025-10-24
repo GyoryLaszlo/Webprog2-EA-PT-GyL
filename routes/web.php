@@ -7,6 +7,8 @@ use App\Http\Controllers\ContactController;
 use App\Models\Message;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\ProcesszorController;
+use App\Http\Controllers\Admin\UserAdminController;
+
 
 Route::get('/', function () {
     return view('home');
@@ -22,9 +24,19 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/admin', function () {
+/*Route::get('/admin', function () {
     return view('admin');
-})->middleware('admin')->name('admin.dashboard');
+})->middleware('admin')->name('admin.dashboard');*/
+Route::middleware(['auth','admin'])
+    ->prefix('admin')->name('admin.')
+    ->group(function () {
+        // dashboard név visszaállítása
+        Route::get('/', fn () => redirect()->route('admin.users.index'))
+            ->name('dashboard');
+
+        Route::get('/users', [UserAdminController::class, 'index'])->name('users.index');
+        Route::patch('/users/{user}', [UserAdminController::class, 'update'])->name('users.update');
+    });
 
 Route::get('/adatbazis', [AdatbazisController::class, 'index'])
      ->name('adatbazis');

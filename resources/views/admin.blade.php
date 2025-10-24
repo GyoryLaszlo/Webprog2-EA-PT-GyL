@@ -1,15 +1,40 @@
-<!doctype html>
-<html lang="hu">
-<head>
-  <meta charset="utf-8">
-  <title>Admin Dashboard</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>body{font-family:system-ui, sans-serif; padding:24px}</style>
-</head>
-<body>
-  <h1>Admin felület</h1>
-  <p>Csak admin láthatja ezt az oldalt.</p>
+{{-- resources/views/admin/users/index.blade.php --}}
+@extends('layouts.app')
 
-  <p><a href="{{ route('home') }}">← Vissza a főoldalra</a></p>
-</body>
-</html>
+@section('content')
+    <div class="container">
+        <h1 class="mb-3">Felhasználók</h1>
+        @if(session('status')) <div class="alert alert-success">{{ session('status') }}</div> @endif
+        @if(session('error'))  <div class="alert alert-danger">{{ session('error') }}</div>  @endif
+
+        <div class="card">
+            <div class="card-body p-0">
+                <table class="table table-sm mb-0 align-middle">
+                    <thead class="table-light">
+                    <tr><th>ID</th><th>Név</th><th>Email</th><th class="text-center">Admin?</th></tr>
+                    </thead>
+                    <tbody>
+                    @foreach($users as $u)
+                        <tr>
+                            <td>{{ $u->id }}</td>
+                            <td>{{ $u->name }}</td>
+                            <td>{{ $u->email }}</td>
+                            <td class="text-center">
+                                <form method="POST" action="{{ route('admin.users.update', $u) }}">
+                                    @csrf @method('PATCH')
+                                    <input type="hidden" name="is_admin" value="0">
+                                    <div class="form-check form-switch d-inline-block">
+                                        <input class="form-check-input" type="checkbox" name="is_admin" value="1"
+                                               onchange="this.form.submit()" @checked($u->is_admin)>
+                                    </div>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer">{{ $users->links() }}</div>
+        </div>
+    </div>
+@endsection
